@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Product.Model.Productmaster>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="pb-2">
+    <form asp-action="Create" method="get">
+        <button type="submit" class="btn btn-primary">
+            Create New
+        </button>
+    </form>
+</div>
+
+<div>
+    <form asp-action="Index" method="get">
+        <div>
+            <div class="pb-2">
+                <input type="text" name="stringSearch" value="@ViewData["CurrentFitter"]" class="form-control" placeholder="Product Name" />
+            </div>
+
+            <div>
+                <select name="type">
+                    <option value="">ทั้งหมด</option>
+                    <option value="B">เสื้อใน</option>
+                    <option value="U">กางเกงใน</option>
+                </select>
+
+                <select name="status">
+                    <option value="">ทั้งหมด</option>
+                    <option value=0>ใช้งาน</option>
+                    <option value=9>ยกเลิก</option>
+                </select>
+            </div>
+            
+            <div>
+                <button type="submit" class="btn btn-primary mt-2">Search</button>
+            </div>
+            
+        </div>
+    </form>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Productname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productstatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createuser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updateuser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updatedate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producttype)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Productname)
+            </td>
+            <td>
+                    @if (item.Productstatus == 0)
+                    {
+                        <span class="badge bg-success">ใช้งาน</span>
+                    }else
+                    {
+                        <span class="badge bg-danger">ยกเลิก</span>
+                    }
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Createuser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Createdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Updateuser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Updatedate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producttype.Producttypename)
+            </td>
+            <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Productid">Edit</a> |
+                    <a class="btn btn-success" asp-action="Details" asp-route-id="@item.Productid">Details</a> |
+                    @if (item.Productstatus != 9)
+                    {
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Productid">Delete</a>
+                    }        
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

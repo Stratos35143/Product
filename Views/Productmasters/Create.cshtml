@@ -1,0 +1,55 @@
+﻿@model Product.Model.Productmaster
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Productmaster</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* <div class="form-group">
+                <label asp-for="Productid" class="control-label"></label>
+                <input asp-for="Productid" class="form-control" />
+                <span asp-validation-for="Productid" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <label asp-for="Productname" class="control-label"></label>
+                <input asp-for="Productname" class="form-control" />
+                <span asp-validation-for="Productname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Producttypeid" class="control-label"></label>
+                <select asp-for="Producttypeid" class ="form-control" asp-items="ViewBag.Producttypeid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Productstatus" class="control-label"></label>
+                <select asp-for="Productstatus" class="form-control">
+                    <option value=0>ใช้งาน</option>
+                    <option value=9>ยกเลิก</option>
+                </select>
+                <span asp-validation-for="Productstatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Createuser" class="control-label"></label>
+                <input asp-for="Createuser" class="form-control" />
+                <span asp-validation-for="Createuser" class="text-danger"></span>
+            </div>
+            <div class="form-group py-2">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
